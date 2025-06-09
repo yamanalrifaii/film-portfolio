@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Film Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            color: #615552;
+            background: #faf9f7;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(250, 249, 247, 0.95);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #ede8e0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #a39080;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: #8b7d72;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 300;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #c4a68a;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #6b5b57;
+            position: relative;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ebe4d9 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 200;
+            letter-spacing: 3px;
+            color: #a39080;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            font-style: italic;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 35px;
+            background: #c4a68a;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #b8997a;
+            transform: translateY(-2px);
+        }
+
+        /* Films Section */
+        .films {
+            padding: 120px 0;
+            background: #faf9f7;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: #a39080;
+            font-weight: 200;
+            letter-spacing: 2px;
+        }
+
+        .films-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .film-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(163, 144, 128, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #f2ede5;
+        }
+
+        .film-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 35px rgba(163, 144, 128, 0.12);
+        }
+
+        .film-thumbnail {
+            width: 100%;
+            height: 220px;
+            background: linear-gradient(135deg, #ebe4d9 0%, #e0d5c7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a39080;
+            font-size: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(196, 166, 138, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: #c4a68a;
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .play-button::after {
+            content: '▶';
+            color: white;
+            font-size: 1rem;
+            margin-left: 2px;
+        }
+
+        .film-info {
+            padding: 2rem;
+        }
+
+        .film-title {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #7a6b61;
+        }
+
+        .film-description {
+            color: #9a8a7f;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        .film-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: #bfb0a1;
+            font-style: italic;
+        }
+
+        /* About Section */
+        .about {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #f5f1eb 0%, #ebe4d9 100%);
+            text-align: center;
+        }
+
+        .about-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            font-weight: 200;
+            color: #a39080;
+            letter-spacing: 2px;
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #7a6b61;
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 0;
+            background: #faf9f7;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #a39080;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .contact-item:hover {
+            color: #c4a68a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 25px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .films-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .films, .about, .contact {
+                padding: 80px 0;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Video Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(163, 144, 128, 0.95);
+            backdrop-filter: blur(15px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .modal video {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 15px 50px rgba(163, 144, 128, 0.3);
+        }
+
+        .close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .close:hover {
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo"></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#films">Films</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Yaman El Rifai</h1>
+                <p>Creating stories that move, inspire, and connect</p>
+                <a href="#films" class="cta-button">View My Work</a>
+            </div>
+        </section>
+
+        <section id="films" class="films">
+            <div class="container">
+                <h2 class="section-title">Short Films</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-thumbnail">
+                            🎬
+                            <div class="play-button" onclick="openModal('film1')"></div>
+                        </div>
+                        <div class="film-info">
+                            <h3 class="film-title">Saleh - صالِح</h3>
+                            <p class="film-description"> With all the distractions we encounter in today's world, all the stress we handle and all the obstacles we face, it is so easy to forget our purpose and the reason we are on this earth. Saleh was created to remind us of the "why". Why we are here, why we do what we do, and why we move the way we move. </p>
+                            <div class="film-meta">
+                                <span>2024</span>
+                                <span>4 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="film-card">
+                        <div class="film-thumbnail">
+                            🚀
+                            <div class="play-button" onclick="openModal('film3')"></div>
+                        </div>
+                        <div class="film-info">
+                            <h3 class="film-title">Childern of expatriation - ولاد الغِربة</h3>
+                            <p class="film-description"> Expatriation comes with lots of blessings such as safety and financial stability. However, leaving home is never easy. Lots of sacrifices are made to secure a better future, and this film captures the pain that comes with these sacrifices.  </p>
+                            <div class="film-meta">
+                                <span>2023</span>
+                                <span>3 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="film-card">
+                        <div class="film-thumbnail">
+                            🌟
+                            <div class="play-button" onclick="openModal('film2')"></div>
+                        </div>
+                        <div class="film-info">
+                            <h3 class="film-title">It's not worth it - مُش مِحرزة</h3>
+                            <p class="film-description">This short film is a reminder of the absurdity of life. It is a reminder to take things easy, one step at a time, for all life's concerns are ultimately insignificant.</p>
+                            <div class="film-meta">
+                                <span>2022</span>
+                                <span>2 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                
+
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2>About Me</h2>
+                    <p>I'm a passionate filmmaker dedicated to telling stories that explore the human experience. I create short films that aim to connect with audiences on an emotional level. My work often focuses on the small moments that define our lives.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-info">
+                    <a href="mailto:yamanhassan610@gmail.com" class="contact-item">
+                        <span>📧</span>
+                        <span>yamanhassan610@gmail.com</span>
+                    </a>
+    
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <video id="modalVideo" controls>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(250, 249, 247, 0.98)';
+                header.style.borderBottom = '1px solid #e0d5c7';
+            } else {
+                header.style.background = 'rgba(250, 249, 247, 0.95)';
+                header.style.borderBottom = '1px solid #ede8e0';
+            }
+        });
+
+        // Video modal functionality
+        const filmVideos = {
+            'film1': '/Users/yamanalrifai/Desktop/Filmmaking/صالِح.mp4',
+            'film2': '/Users/yamanalrifai/Desktop/Filmmaking/not worth it.mp4',
+            'film3': '/Users/yamanalrifai/Desktop/Filmmaking/Children of expatriation _ ولاد الغربة.mp4'
+        };
+
+        function openModal(filmId) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            const videoSrc = filmVideos[filmId];
+            
+            if (videoSrc) {
+                video.src = videoSrc;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            } else {
+                alert('Video coming soon! Please upload your video files and update the filmVideos object with the correct paths.');
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            
+            modal.style.display = 'none';
+            video.pause();
+            video.src = '';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside the video
+        window.onclick = function(event) {
+            const modal = document.getElementById('videoModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Escape key to close modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Add loading animation for film cards
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.film-card').forEach((card) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
