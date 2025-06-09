@@ -25,7 +25,6 @@
             padding: 0 40px;
         }
 
-        /* Header */
         header {
             background: rgba(250, 249, 247, 0.95);
             position: fixed;
@@ -69,7 +68,6 @@
             color: #c4a68a;
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -120,7 +118,6 @@
             transform: translateY(-2px);
         }
 
-        /* Films Section */
         .films {
             padding: 120px 0;
             background: #faf9f7;
@@ -225,7 +222,6 @@
             font-style: italic;
         }
 
-        /* About Section */
         .about {
             padding: 120px 0;
             background: linear-gradient(135deg, #f5f1eb 0%, #ebe4d9 100%);
@@ -252,7 +248,6 @@
             font-weight: 300;
         }
 
-        /* Contact Section */
         .contact {
             padding: 120px 0;
             background: #faf9f7;
@@ -281,7 +276,6 @@
             color: #c4a68a;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 0 25px;
@@ -319,12 +313,10 @@
             }
         }
 
-        /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
         }
 
-        /* Video Modal */
         .modal {
             display: none;
             position: fixed;
@@ -438,9 +430,30 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+        <section id="films" class="films">
+            <div class="container">
+                <h2 class="section-title">VR Experiences</h2>
+                <div class="films-grid">
+                    <div class="film-card">
+                        <div class="film-thumbnail">
+                            🎬
+                            <div class="play-button" onclick="openModal('film4')"></div>
+                        </div>
+                        <div class="film-info">
+                            <h3 class="film-title">Witnessing Gaza</h3>
+                            <p class="film-description"> In light of the ongoing tragedy in Gaza, this VR experience aims to shed light on the human suffering and resilience of the people living there.
+                                As filmmakers, we believe in the power of storytelling to evoke empathy and understanding. This experiece offers users an immersive journey through the raw emotions of loss, fear, anger, and pain experienced by the resilient souls of Gaza. By delving deeper into the complexities of human struggle beyond media representations, we hope to foster empathy, understanding, and awareness. </p>
+                            <div class="film-meta">
+                                <span>2024</span>
+                                <span>7 minutes</span>
+                            </div>
+                        </div>
+                    </div>
 
-                
-
+                 
                 </div>
             </div>
         </section>
@@ -468,7 +481,6 @@
         </section>
     </main>
 
-    <!-- Video Modal -->
     <div id="videoModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -480,7 +492,6 @@
     </div>
 
     <script>
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -490,7 +501,6 @@
             });
         });
 
-        // Header background change on scroll
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             if (window.scrollY > 100) {
@@ -502,11 +512,11 @@
             }
         });
 
-        // Video modal functionality
         const filmVideos = {
             'film1': '/Users/yamanalrifai/Desktop/Filmmaking/صالِح.mp4',
             'film2': '/Users/yamanalrifai/Desktop/Filmmaking/not worth it.mp4',
-            'film3': '/Users/yamanalrifai/Desktop/Filmmaking/Children of expatriation _ ولاد الغربة.mp4'
+            'film3': '/Users/yamanalrifai/Desktop/Filmmaking/Children of expatriation _ ولاد الغربة.mp4', 
+            'film4': '/Users/yamanalrifai/Desktop/Filmmaking/witnessingGaza.mp4'
         };
 
         function openModal(filmId) {
@@ -533,7 +543,6 @@
             document.body.style.overflow = 'auto';
         }
 
-        // Close modal when clicking outside the video
         window.onclick = function(event) {
             const modal = document.getElementById('videoModal');
             if (event.target == modal) {
@@ -541,14 +550,12 @@
             }
         }
 
-        // Escape key to close modal
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeModal();
             }
         });
 
-        // Add loading animation for film cards
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
