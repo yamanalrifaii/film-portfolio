@@ -513,33 +513,55 @@
         });
 
         const filmVideos = {
-            'film1': '/Users/yamanalrifai/Desktop/Filmmaking/صالِح.mp4',
-            'film2': '/Users/yamanalrifai/Desktop/Filmmaking/not worth it.mp4',
-            'film3': '/Users/yamanalrifai/Desktop/Filmmaking/Children of expatriation _ ولاد الغربة.mp4', 
-            'film4': '/Users/yamanalrifai/Desktop/Filmmaking/witnessingGaza.mp4'
+            'film1': 'https://www.youtube.com/embed/fgIrUFXxCeY',
+            'film2': 'https://www.youtube.com/embed/UcMBGKpUA-A',
+            'film3': 'https://www.youtube.com/embed/eLKv2V4RZkA', 
+            'film4': 'https://www.youtube.com/embed/WWtAFUvJnZY'
         };
 
         function openModal(filmId) {
             const modal = document.getElementById('videoModal');
-            const video = document.getElementById('modalVideo');
+            const modalContent = document.querySelector('.modal-content');
             const videoSrc = filmVideos[filmId];
             
             if (videoSrc) {
-                video.src = videoSrc;
+                if (videoSrc.includes('youtube.com/embed/')) {
+                    modalContent.innerHTML = `
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <iframe width="100%" height="500px" src="${videoSrc}?autoplay=1" 
+                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen style="border-radius: 8px; box-shadow: 0 15px 50px rgba(163, 144, 128, 0.3);">
+                        </iframe>
+                    `;
+                } else {
+                    modalContent.innerHTML = `
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <video controls style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 15px 50px rgba(163, 144, 128, 0.3);">
+                            <source src="${videoSrc}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    `;
+                }
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
             } else {
-                alert('Video coming soon! Please upload your video files and update the filmVideos object with the correct paths.');
+                alert('Video coming soon!');
             }
         }
 
         function closeModal() {
             const modal = document.getElementById('videoModal');
-            const video = document.getElementById('modalVideo');
+            const modalContent = document.querySelector('.modal-content');
             
             modal.style.display = 'none';
-            video.pause();
-            video.src = '';
+            // Reset modal content
+            modalContent.innerHTML = `
+                <span class="close" onclick="closeModal()">&times;</span>
+                <video id="modalVideo" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
             document.body.style.overflow = 'auto';
         }
 
